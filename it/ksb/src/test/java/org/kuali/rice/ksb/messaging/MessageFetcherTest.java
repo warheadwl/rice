@@ -67,6 +67,9 @@ public class MessageFetcherTest extends KSBTestCase {
         // an overworked CI env.
         TestHarnessSharedTopic.CALL_COUNT_NOTIFICATION_THRESHOLD = 500;
 
+        System.out.println("Message off?: " + ConfigContext.getCurrentContextConfig().getProperty(KSBConstants.Config.MESSAGING_OFF));
+        System.out.println("Thread: " + Thread.currentThread() + " ClassLoader: " + Thread.currentThread().getContextClassLoader());
+
         for (int i = 0; i < TestHarnessSharedTopic.CALL_COUNT_NOTIFICATION_THRESHOLD; i++) {
             sendMessage();
         }

@@ -34,6 +34,9 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 public class MessageSender {
 
     public static void sendMessage(PersistedMessageBO message) throws Exception {
+        System.out.println("Sending message: " + message);
+        System.out.println("Message off?: " + ConfigContext.getCurrentContextConfig().getProperty(KSBConstants.Config.MESSAGING_OFF));
+        System.out.println("Thread: " + Thread.currentThread() + " ClassLoader: " + Thread.currentThread().getContextClassLoader());
         if (!Boolean.valueOf(ConfigContext.getCurrentContextConfig().getProperty(KSBConstants.Config.MESSAGING_OFF))) {
 
             if (ConfigContext.getCurrentContextConfig().getObject(RiceConstants.SPRING_TRANSACTION_MANAGER) != null
