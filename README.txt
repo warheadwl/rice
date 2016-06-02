@@ -21,7 +21,7 @@ ${readme.build.timestamp}
 
 Contents
 -----
-Preface
+Preface 
 Licensing and Licenses
 References and Links
 
