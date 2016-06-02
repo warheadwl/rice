@@ -15,10 +15,12 @@
  */
 package org.kuali.rice.ksb.messaging.remotedservices;
 
-import java.io.Serializable;
-
 import org.kuali.rice.core.api.config.CoreConfigHelper;
+import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.ksb.messaging.service.KSBJavaService;
+import org.kuali.rice.ksb.util.KSBConstants;
+
+import java.io.Serializable;
 
 
 public class TestHarnessSharedTopic implements KSBJavaService {
@@ -29,7 +31,10 @@ public class TestHarnessSharedTopic implements KSBJavaService {
 
     public synchronized void invoke(Serializable payLoad) {
             CALL_COUNT++;
+        System.out.println("TestHarnessSharedTopic Message off?: " + ConfigContext.getCurrentContextConfig().getProperty(KSBConstants.Config.MESSAGING_OFF));
+        System.out.println("TestHarnessSharedTopic Thread: " + Thread.currentThread() + " ClassLoader: " + Thread.currentThread().getContextClassLoader());
         System.out.println("!!!TestHarnessSharedTopic called with M.E " + CoreConfigHelper.getApplicationId() + " !!! ");
+        new Throwable().printStackTrace();
         ServiceCallInformationHolder.stuff.put("TestHarnessCalled", Boolean.TRUE);
         if (CALL_COUNT_NOTIFICATION_THRESHOLD > 0) {
             if (CALL_COUNT == CALL_COUNT_NOTIFICATION_THRESHOLD) {
